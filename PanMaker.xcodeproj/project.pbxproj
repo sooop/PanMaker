@@ -13,6 +13,7 @@
 		8592B2E014FB675800B50188 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8592B2DE14FB675800B50188 /* Credits.rtf */; };
 		8592B2E314FB675800B50188 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8592B2E214FB675800B50188 /* AppDelegate.m */; };
 		8592B2E614FB675800B50188 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8592B2E414FB675800B50188 /* MainMenu.xib */; };
+		8592B2EE14FB68C700B50188 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8592B2ED14FB68C700B50188 /* AppController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +22,16 @@
 		8592B2D214FB675800B50188 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8592B2D314FB675800B50188 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8592B2D414FB675800B50188 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		8592B2D714FB675800B50188 /* PanMaker-Info.plist */ = {isa = PBXFileReference; path = "PanMaker-Info.plist"; sourceTree = "<group>"; };
+		8592B2D714FB675800B50188 /* PanMaker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PanMaker-Info.plist"; sourceTree = "<group>"; };
 		8592B2D914FB675800B50188 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8592B2DB14FB675800B50188 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8592B2DD14FB675800B50188 /* PanMaker-Prefix.pch */ = {isa = PBXFileReference; path = "PanMaker-Prefix.pch"; sourceTree = "<group>"; };
+		8592B2DD14FB675800B50188 /* PanMaker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PanMaker-Prefix.pch"; sourceTree = "<group>"; };
 		8592B2DF14FB675800B50188 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		8592B2E114FB675800B50188 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		8592B2E114FB675800B50188 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8592B2E214FB675800B50188 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8592B2E514FB675800B50188 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		8592B2EC14FB68C700B50188 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		8592B2ED14FB68C700B50188 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				8592B2E114FB675800B50188 /* AppDelegate.h */,
 				8592B2E214FB675800B50188 /* AppDelegate.m */,
 				8592B2E414FB675800B50188 /* MainMenu.xib */,
+				8592B2EC14FB68C700B50188 /* AppController.h */,
+				8592B2ED14FB68C700B50188 /* AppController.m */,
 				8592B2D614FB675800B50188 /* Supporting Files */,
 			);
 			path = PanMaker;
@@ -167,6 +172,7 @@
 			files = (
 				8592B2DC14FB675800B50188 /* main.m in Sources */,
 				8592B2E314FB675800B50188 /* AppDelegate.m in Sources */,
+				8592B2EE14FB68C700B50188 /* AppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +294,7 @@
 				8592B2EB14FB675800B50188 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
