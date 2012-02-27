@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'PanMaker' target in the 'PanMaker' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
