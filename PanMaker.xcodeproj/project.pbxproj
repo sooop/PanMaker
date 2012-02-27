@@ -14,6 +14,7 @@
 		8592B2E314FB675800B50188 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8592B2E214FB675800B50188 /* AppDelegate.m */; };
 		8592B2E614FB675800B50188 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8592B2E414FB675800B50188 /* MainMenu.xib */; };
 		8592B2EE14FB68C700B50188 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8592B2ED14FB68C700B50188 /* AppController.m */; };
+		8592B2FC14FB765C00B50188 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8592B2FB14FB765C00B50188 /* MainView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		8592B2E514FB675800B50188 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8592B2EC14FB68C700B50188 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		8592B2ED14FB68C700B50188 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		8592B2FA14FB765C00B50188 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
+		8592B2FB14FB765C00B50188 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				8592B2E414FB675800B50188 /* MainMenu.xib */,
 				8592B2EC14FB68C700B50188 /* AppController.h */,
 				8592B2ED14FB68C700B50188 /* AppController.m */,
+				8592B2FA14FB765C00B50188 /* MainView.h */,
+				8592B2FB14FB765C00B50188 /* MainView.m */,
 				8592B2D614FB675800B50188 /* Supporting Files */,
 			);
 			path = PanMaker;
@@ -173,6 +178,7 @@
 				8592B2DC14FB675800B50188 /* main.m in Sources */,
 				8592B2E314FB675800B50188 /* AppDelegate.m in Sources */,
 				8592B2EE14FB68C700B50188 /* AppController.m in Sources */,
+				8592B2FC14FB765C00B50188 /* MainView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
