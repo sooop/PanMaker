@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MainView.h"
 
-@interface AppController : NSObject 
+@interface AppController : NSObject <DragDesinationViewDelegate>
 
 @end

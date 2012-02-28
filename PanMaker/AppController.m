@@ -7,7 +7,11 @@
 //
 
 #import "AppController.h"
-@interface AppController() 
+@interface AppController() <NSTableViewDataSource>
+{
+    NSMutableArray *imageURLList;
+    NSMutableArray *imageList;
+}
 @property (weak) IBOutlet NSMatrix *directionSelect;
 @property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSView *mainView;
@@ -17,12 +21,13 @@
 @synthesize directionSelect;
 @synthesize tableView;
 @synthesize mainView;
-- (IBAction)generateClicked:(id)sender {
-}
+
 
 -(void)awakeFromNib
 {
     [self.mainView registerForDraggedTypes:[NSArray arrayWithObjects:NSColorPboardType,NSFilenamesPboardType, nil]];
+    imageURLList = [NSMutableArray array];
+    imageList = [NSMutableArray array];
 }
 
 -(NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
@@ -36,5 +41,49 @@
     return YES;
 }
 
+#pragma mark - Main View Delegate
+-(void)queueImageURL:(NSURL *)imageURL
+{
+    [imageURLList addObject:imageURL];
+    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+    NSImage *anImage = [[NSImage alloc] initWithData:imageData];
+    [imageList addObject:anImage];
+    
+    [self.tableView reloadData];
+}
+
+#pragma mark - table view data source
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return [imageURLList count];
+}
+
+-(id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    NSSize imageSize = [(NSImage*)[imageList objectAtIndex:row] size];
+    if ([tableColumn.identifier isEqualToString:@"path"]) {
+        return [[imageURLList objectAtIndex:row] path];
+    }
+    if( [tableColumn.identifier isEqualToString:@"height"]) {
+        return [NSString stringWithFormat:@"%4.0f",imageSize.height];
+    }
+    if( [tableColumn.identifier isEqualToString:@"width"]) {
+        return [NSString stringWithFormat:@"%4.0f",imageSize.width];
+    }
+    return @"";
+}
+
+-(void)makePanorama
+{
+    if (![imageURLList count]) return;
+    NSImageView *anImageView = [[NSImageView alloc] initWithFrame:self.mainView.frame];
+    anImageView.image = [imageList objectAtIndex:0];
+    [self.mainView addSubview:anImageView];
+
+}
+
+- (IBAction)generatePressed:(id)sender {
+    [self makePanorama];
+}
 
 @end
