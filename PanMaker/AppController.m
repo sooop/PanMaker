@@ -7,25 +7,49 @@
 //
 
 #import "AppController.h"
+
+typedef enum{
+    kPanoramaImageDirectionVertical = 0,
+    kPanoramaImageDirectionHorizontal = 1
+} compositedImageDirection;
+
 @interface AppController() <NSTableViewDataSource>
 {
     NSMutableArray *imageURLList;
     NSMutableArray *imageList;
     double kRatioFactor;
 }
-@property (weak) IBOutlet NSMatrix *directionSelect;
 @property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSView *mainView;
+@property (nonatomic) float resultSize;
+@property (nonatomic) compositedImageDirection panoramaDirection;
+@property (nonatomic,strong) NSNumber *modeNumber;
 @end
 
 @implementation AppController
-@synthesize directionSelect;
 @synthesize tableView;
 @synthesize mainView;
+@synthesize panoramaDirection = _panoramaDirection, resultSize = _rulingSize;
+@synthesize modeNumber = _modeNumber;
 
-#define RESULT_IMAGE_WIDTH 640
-#define RESULT_IMAGE_HEIGHT 480
+-(NSNumber*)modeNumber
+{
+    if(!_modeNumber) {
+        _modeNumber = [NSNumber numberWithInt:0];
+    }
+    _modeNumber = [NSNumber numberWithInt:(int)self.panoramaDirection];
+    return _modeNumber;
+}
+
 #define PATH_TO_SAVE @"/Users/soooprmx/Desktop/result.png"
+
+-(NSString*)savePath
+{
+    NSString *result = [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    result  = [result stringByAppendingPathComponent:@"result.png"];
+    return result;
+    
+}
 
 
 
@@ -60,52 +84,94 @@
     float result = 0;
     for (id aObj in imageList) {
         NSSize aSize = [(NSImage*)aObj size];
-        float heightOfOneImage = 640 * aSize.height / aSize.width;
+        float heightOfOneImage = self.resultSize * aSize.height / aSize.width;
         result += heightOfOneImage;
     }
     return result;
 }
 
+-(float)getTotalWidth
+{
+    float result = 0;
+    for (id aObj in imageList) {
+        NSSize aSize = [(NSImage*)aObj size];
+        float widthOfOneImage = self.resultSize * aSize.width / aSize.height;
+        result += widthOfOneImage;
+    }
+    return result;
+}
+
+
 -(void)makePanorama
 {
     if (![imageURLList count]) return;
     
-    // 세로방향으로 더함
     NSSize resultSize;
-    resultSize.width = RESULT_IMAGE_WIDTH;
-    resultSize.height = [self getTotalHeight];
-    NSImage *resultImage = [[NSImage alloc] initWithSize:resultSize];
     NSPoint startPoint;
     NSSize startSize;
-    startPoint.x = 0;
-    startPoint.y = resultImage.size.height;
-    startSize.width = 640;
-    startSize.height = 0;
+    NSImage *resultImage;
     
-    [resultImage lockFocus];
-    for (NSImage *anImage in imageList) {
-        startSize.height = anImage.size.height * 640 / anImage.size.width;
-        startPoint.y -= startSize.height;
-        NSRect rectOfAnImage = NSMakeRect(startPoint.x, startPoint.y, startSize.width, startSize.height);
-        [anImage drawInRect:rectOfAnImage fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    if(self.panoramaDirection == kPanoramaImageDirectionVertical) {
+        // 세로방향으로 더함
+        resultSize.width = self.resultSize;
+        resultSize.height = [self getTotalHeight];
+        
+        resultImage = [[NSImage alloc] initWithSize:resultSize];
+
+        startPoint.x = 0;
+        startPoint.y = resultImage.size.height;
+        startSize.width = self.resultSize;
+        startSize.height = 0;
+        
+        [resultImage lockFocus];
+        for (NSImage *anImage in imageList) {
+            startSize.height = anImage.size.height * self.resultSize / anImage.size.width;
+            startPoint.y -= startSize.height;
+            NSRect rectOfAnImage = NSMakeRect(startPoint.x, startPoint.y, startSize.width, startSize.height);
+            [anImage drawInRect:rectOfAnImage fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+        }
+        [resultImage unlockFocus]; 
+        
+    } 
+    else {
+        // 가로방향으로 이미지를 더함
+        resultSize.height = self.resultSize;
+        resultSize.width = [self getTotalWidth];
+        
+        resultImage = [[NSImage alloc] initWithSize:resultSize];
+        
+        startPoint.x = 0;
+        startPoint.y = 0;
+        startSize.width = 0;
+        startSize.height = self.resultSize;
+        
+        [resultImage lockFocus];
+        for (NSImage *anImage in imageList) {
+            startSize.width = anImage.size.width * self.resultSize / anImage.size.height;
+            NSRect rectOfAnImage = NSMakeRect(startPoint.x, startPoint.y, startSize.width, startSize.height);
+            [anImage drawInRect:rectOfAnImage fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+            startPoint.x += startSize.width;
+        }
+        [resultImage unlockFocus];
     }
-    [resultImage unlockFocus];
     
-//    NSImageView *aaa = [[NSImageView alloc] initWithFrame:self.mainView.frame];
-//    aaa.image = resultImage;
-//    [self.mainView addSubview:aaa];
+    
+
     
     NSData *resultImageData = [resultImage TIFFRepresentation];
     NSBitmapImageRep *rep = [NSBitmapImageRep imageRepWithData:resultImageData];
     NSDictionary *properties = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0] forKey:NSImageCompressionFactor];
-    resultImageData = [rep representationUsingType:NSPNGFileType properties:properties];
-    [resultImageData writeToFile:PATH_TO_SAVE atomically:NO];
     
-    resultImage = nil;
-    resultImageData = nil;
-    imageList = [NSMutableArray array];
-    imageURLList = [NSMutableArray array];
-    [self.tableView reloadData];
+    resultImageData = [rep representationUsingType:NSPNGFileType properties:properties];
+    
+    BOOL success = [resultImageData writeToFile:[self savePath] atomically:NO];
+    if(success) {
+        resultImage = nil;
+        resultImageData = nil;
+        [imageList removeAllObjects];
+        [imageURLList removeAllObjects];
+        [self.tableView reloadData];        
+    }
     
     
 }
@@ -119,6 +185,8 @@
     imageURLList = [NSMutableArray array];
     imageList = [NSMutableArray array];
     kRatioFactor = 0;
+    self.panoramaDirection = kPanoramaImageDirectionVertical;
+    self.resultSize = 400;
 }
 
 -(NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
