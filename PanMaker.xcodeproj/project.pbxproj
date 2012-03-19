@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8504F04715142AB20098F066 /* FolderSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8504F04615142AB20098F066 /* FolderSetting.xib */; };
+		8504F04B15142BAE0098F066 /* SettingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8504F04A15142BAE0098F066 /* SettingWindowController.m */; };
 		8592B2D014FB675800B50188 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8592B2CF14FB675800B50188 /* Cocoa.framework */; };
 		8592B2DA14FB675800B50188 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8592B2D814FB675800B50188 /* InfoPlist.strings */; };
 		8592B2DC14FB675800B50188 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8592B2DB14FB675800B50188 /* main.m */; };
@@ -16,9 +18,14 @@
 		8592B2EE14FB68C700B50188 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8592B2ED14FB68C700B50188 /* AppController.m */; };
 		8592B2FC14FB765C00B50188 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8592B2FB14FB765C00B50188 /* MainView.m */; };
 		859E016F151306A3005AE069 /* PanIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 859E016E151306A3005AE069 /* PanIcon.icns */; };
+		85EE84841516B66200745CBF /* prep.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85EE84831516B66200745CBF /* prep.plist */; };
+		85EE84881516B6DA00745CBF /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EE84871516B6DA00745CBF /* SettingController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8504F04615142AB20098F066 /* FolderSetting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FolderSetting.xib; sourceTree = "<group>"; };
+		8504F04915142BAE0098F066 /* SettingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingWindowController.h; sourceTree = "<group>"; };
+		8504F04A15142BAE0098F066 /* SettingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingWindowController.m; sourceTree = "<group>"; };
 		8592B2CB14FB675800B50188 /* PanMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PanMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8592B2CF14FB675800B50188 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8592B2D214FB675800B50188 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -37,6 +44,9 @@
 		8592B2FA14FB765C00B50188 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		8592B2FB14FB765C00B50188 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		859E016E151306A3005AE069 /* PanIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PanIcon.icns; sourceTree = "<group>"; };
+		85EE84831516B66200745CBF /* prep.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prep.plist; sourceTree = "<group>"; };
+		85EE84861516B6DA00745CBF /* SettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingController.h; sourceTree = "<group>"; };
+		85EE84871516B6DA00745CBF /* SettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +104,15 @@
 				8592B2E114FB675800B50188 /* AppDelegate.h */,
 				8592B2E214FB675800B50188 /* AppDelegate.m */,
 				8592B2E414FB675800B50188 /* MainMenu.xib */,
+				8504F04615142AB20098F066 /* FolderSetting.xib */,
+				8504F04915142BAE0098F066 /* SettingWindowController.h */,
+				8504F04A15142BAE0098F066 /* SettingWindowController.m */,
 				8592B2EC14FB68C700B50188 /* AppController.h */,
 				8592B2ED14FB68C700B50188 /* AppController.m */,
 				8592B2FA14FB765C00B50188 /* MainView.h */,
 				8592B2FB14FB765C00B50188 /* MainView.m */,
+				85EE84861516B6DA00745CBF /* SettingController.h */,
+				85EE84871516B6DA00745CBF /* SettingController.m */,
 				8592B2D614FB675800B50188 /* Supporting Files */,
 			);
 			path = PanMaker;
@@ -111,6 +126,7 @@
 				8592B2DB14FB675800B50188 /* main.m */,
 				8592B2DD14FB675800B50188 /* PanMaker-Prefix.pch */,
 				8592B2DE14FB675800B50188 /* Credits.rtf */,
+				85EE84831516B66200745CBF /* prep.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -141,7 +157,7 @@
 		8592B2C214FB675700B50188 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 8592B2C514FB675700B50188 /* Build configuration list for PBXProject "PanMaker" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -169,6 +185,8 @@
 				8592B2E014FB675800B50188 /* Credits.rtf in Resources */,
 				8592B2E614FB675800B50188 /* MainMenu.xib in Resources */,
 				859E016F151306A3005AE069 /* PanIcon.icns in Resources */,
+				8504F04715142AB20098F066 /* FolderSetting.xib in Resources */,
+				85EE84841516B66200745CBF /* prep.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +201,8 @@
 				8592B2E314FB675800B50188 /* AppDelegate.m in Sources */,
 				8592B2EE14FB68C700B50188 /* AppController.m in Sources */,
 				8592B2FC14FB765C00B50188 /* MainView.m in Sources */,
+				8504F04B15142BAE0098F066 /* SettingWindowController.m in Sources */,
+				85EE84881516B6DA00745CBF /* SettingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "AppController.h"
+#import "SettingController.h"
 
 typedef enum{
     kPanoramaImageDirectionVertical = 0,
@@ -18,12 +19,16 @@ typedef enum{
     NSMutableArray *imageURLList;
     NSMutableArray *imageList;
     double kRatioFactor;
+    SettingController *settingController;
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSView *mainView;
 @property (nonatomic) float resultSize;
 @property (nonatomic) compositedImageDirection panoramaDirection;
 @property (nonatomic,strong) NSNumber *modeNumber;
+@property (nonatomic, copy) NSString *savingPath;
+@property (copy, nonatomic) NSString *resultFilename;
+@property (readwrite, nonatomic) int indexNumber;
 @end
 
 @implementation AppController
@@ -31,9 +36,43 @@ typedef enum{
 @synthesize mainView;
 @synthesize panoramaDirection = _panoramaDirection, resultSize = _rulingSize;
 @synthesize modeNumber = _modeNumber;
+@synthesize savingPath = _savingPath;
+@synthesize indexNumber;
+@synthesize resultFilename = _resultFilename;
+
+-(NSString *)savingPath
+{
+    if(!settingController.savingPath) {
+        settingController.savingPath = [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    }
+    return settingController.savingPath;
+}
+
+-(NSString *)resultFilename
+{
+    return settingController.fileName;
+}
+
+-(int)indexNumber
+{
+    return settingController.indexKey.intValue;
+}
+
+-(id)init
+{
+    self = [super init];
+    if(self)
+    {
+        settingController = [SettingController defaultController];
+    }
+    
+    return self;
+}
+
 
 -(NSNumber*)modeNumber
 {
+    //  indicate the result image's direction is vertical or horizontal
     if(!_modeNumber) {
         _modeNumber = [NSNumber numberWithInt:0];
     }
@@ -41,12 +80,12 @@ typedef enum{
     return _modeNumber;
 }
 
-#define PATH_TO_SAVE @"/Users/soooprmx/Desktop/result.png"
 
 -(NSString*)savePath
 {
-    NSString *result = [NSSearchPathForDirectoriesInDomains(NSDesktopDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    result  = [result stringByAppendingPathComponent:@"result.png"];
+    
+    NSString* result  = [self.savingPath stringByAppendingPathComponent:
+               [NSString stringWithFormat:@"%@-%03d.png",self.resultFilename,self.indexNumber]];
     return result;
     
 }
@@ -170,7 +209,8 @@ typedef enum{
         resultImageData = nil;
         [imageList removeAllObjects];
         [imageURLList removeAllObjects];
-        [self.tableView reloadData];        
+        [self.tableView reloadData];    
+        [settingController increaseIndexKey];
     }
     
     
@@ -187,6 +227,8 @@ typedef enum{
     kRatioFactor = 0;
     self.panoramaDirection = kPanoramaImageDirectionVertical;
     self.resultSize = 400;
+    
+    settingController = [SettingController defaultController];
 }
 
 -(NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
