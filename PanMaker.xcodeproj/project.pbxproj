@@ -113,6 +113,7 @@
 				8592B2FB14FB765C00B50188 /* MainView.m */,
 				85EE84861516B6DA00745CBF /* SettingController.h */,
 				85EE84871516B6DA00745CBF /* SettingController.m */,
+				85EE84831516B66200745CBF /* prep.plist */,
 				8592B2D614FB675800B50188 /* Supporting Files */,
 			);
 			path = PanMaker;
@@ -126,7 +127,6 @@
 				8592B2DB14FB675800B50188 /* main.m */,
 				8592B2DD14FB675800B50188 /* PanMaker-Prefix.pch */,
 				8592B2DE14FB675800B50188 /* Credits.rtf */,
-				85EE84831516B66200745CBF /* prep.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
